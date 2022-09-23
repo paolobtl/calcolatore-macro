@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Calcolatore Macronutrientri</title>
+  <script defer src="script.js"></script>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1>Calcolatore</h1>
+  Totale kcal<input type="number" min="0" max"400" class="valoriInput" id="totaleKcal">
+  Peso<input type="number" min="0" max"400" class="valoriInput" id="peso">
+  Quantita proteine<input type="number" min="0" max"400" class="valoriInput" id="qtyPro">
+  Quantita grassi<input type="number" min="0" max"400" class="valoriInput" id="qtyFat">
+  Quantita carboidrati<input type="number" min="0" max"400" class="valoriInput" id="qtyCarb" readonly>
+
+  
+  <button id="calcola">Calcola</button>
+
+  <div id="table">
+    <table class="tg">
+    </table>
+  </div>
+</body>
+</html>
