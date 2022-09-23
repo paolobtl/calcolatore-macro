@@ -7,17 +7,20 @@
   <title>Calcolatore Macronutrientri</title>
   <script defer src="script.js"></script>
   <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 <body>
   <h1>Calcolatore</h1>
-  Totale kcal<input type="number" min="0" max"400" class="valoriInput" id="totaleKcal">
-  Peso<input type="number" min="0" max"400" class="valoriInput" id="peso">
-  Quantita proteine<input type="number" min="0" max"400" class="valoriInput" id="qtyPro">
-  Quantita grassi<input type="number" min="0" max"400" class="valoriInput" id="qtyFat">
-  Quantita carboidrati<input type="number" min="0" max"400" class="valoriInput" id="qtyCarb" readonly>
 
-  
-  <button id="calcola">Calcola</button>
+    Totale kcal<input type="number" min="0" max"400" class="valoriInput" id="totaleKcal">
+    Peso<input type="number" step="0.01" min="0" max"400" class="valoriInput" id="peso">
+    Proteine/kg<span title="Quante proteine per kg di peso corporeo?" class="material-icons">help_outline</span><input type="number" step="0.01" min="0" max"400" class="valoriInput" id="qtyPro">
+    Grassi/kg<span title="Quanti grassi per kg di peso corporeo?" class="material-icons">help_outline</span><input type="number" step="0.01" min="0" max"400" class="valoriInput" id="qtyFat">
+    Carboidrati/kg<span title="Questo campo verrà calcolato automaticamente" class="material-icons">help_outline</span><input type="number" min="0" max"400" class="valoriInput" id="qtyCarb" readonly>
+    <input type="submit" id="calcola" value="Calcola">
+
+
+
 
   <div id="table">
     <table class="tg">

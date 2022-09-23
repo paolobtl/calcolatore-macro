@@ -1,7 +1,9 @@
 body {
   margin: 2em;
 }
-
+.material-icons {
+  font-size: 15px!important;
+}
 .valoriInput {
   display: block;
   margin-bottom: 1em
@@ -61,3 +63,5 @@ body {
   color: rgb(48, 48, 48);
   font-weight: bold;
 }
+
+
