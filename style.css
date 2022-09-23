@@ -1,9 +1,8 @@
 body {
   margin: 2em;
 }
-.material-icons {
-  font-size: 15px!important;
-}
+.material-icons.md-18 { font-size: 18px; }
+
 .valoriInput {
   display: block;
   margin-bottom: 1em
