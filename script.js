@@ -1,8 +1,10 @@
 const calcola = document.getElementById('calcola');
+const salva = document.getElementById('salva');
 const input = document.querySelectorAll(".valoriInput");
 
 let valoriInput = {};
 let risultati = new Array(3);
+
 
 for (let i = 0; i < risultati.length; i++) {
   risultati[i] = {
@@ -13,6 +15,7 @@ for (let i = 0; i < risultati.length; i++) {
 }
 const table = document.querySelector("table");
 let data = Object.keys(risultati[0]);
+if (table.innerText === '') salva.style.display = 'none';
 
 const generateTableHead = (table, data) => {
   let thead = table.createTHead();
@@ -33,7 +36,7 @@ const generateTable = (table, data) => {
       cell.appendChild(text);
     }
   }
-  
+
 };
 
 const calcolo = () => {
@@ -41,7 +44,7 @@ const calcolo = () => {
   while (i < risultati.length) {
     let n = i % 2 === 0 ? 4 : 9;
     let qty = i === 0 ? valoriInput.qtyPro : valoriInput.qtyFat;
-    risultati[i].Kcal = i !== 2 ? Math.round(valoriInput.peso * qty * n * 1e2) / 1e2 : valoriInput.totaleKcal - (risultati[1].Kcal + risultati[0].Kcal);
+    risultati[i].Kcal = i !== 2 ? Math.round(valoriInput.peso * qty * n * 1e2) / 1e2 : Math.round((valoriInput.totaleKcal - (risultati[1].Kcal + risultati[0].Kcal)) * 1e2) / 1e2;
     risultati[i].Grammi = Math.round(risultati[i].Kcal / n * 1e2) / 1e2;
     risultati[i].Percentuale = Math.round(risultati[i].Kcal / valoriInput.totaleKcal * 100) || 0;
     i++;
@@ -55,10 +58,22 @@ const resetTable = () => {
     document.querySelector("thead").remove()
   }
 }
+
 calcola.addEventListener('click', function () {
   input.forEach(e => valoriInput[e.id] = Math.round(e.value * 1e2) / 1e2);
   resetTable();
   calcolo();
   generateTableHead(table, data);
   generateTable(table, risultati);
+  salva.style.display = '';
 });
+
+
+salva.addEventListener('click', function () {
+  localStorage.setItem('table', table.innerHTML);
+});
+
+recupera.addEventListener('click', function () {
+  if (localStorage.getItem('table')) {
+    table.innerHTML = localStorage.getItem('table');
+  }})
