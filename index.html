@@ -28,16 +28,20 @@
     <label for="qtyCarb">Carboidrati g/kg</label> 
     <span title="Questo campo verrà calcolato automaticamente" class="material-icons md-18">help_outline</span><input type="number" min="0" max"400" class="valoriInput" name="qtyCarb" id="qtyCarb" readonly>
     
-    <input type="submit" id="calcola" value="Calcola">
+    <button id="calcola" value="Calcola" class="button-37" role="button">Calcola</button>
 
     
-    <div class="tg" id="results">
+    <div id="results">
     </div>
 
 
   <div class="configurazione">
-    <a href="#" id="salva">Salva configurazione</a>
-    <a href="#results" id="recupera">Recupera configurazione</a>
+    <div>
+      <button id="salva" class="button-37" role="button" disabled>Salva configurazione</button>
+    </div>
+    <div>
+      <button href="#results" id="recupera" class="button-37" role="button" disabled>Recupera configurazione</button>
+    </div>
   </div>
 </body>
 </html>
