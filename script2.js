@@ -51,6 +51,8 @@ const calcoloMacros = (k) => {
     i++;
   }
   getID('qtyCarb').value = Number(parseFloat(totale.macros.Carboidrati.Grammi / peso).toFixed(1)) || '';
+  log(k);
+  return k;
 };
 
 const printResults = (el, data) => {
@@ -75,14 +77,6 @@ const printResults = (el, data) => {
   }
 };
 
-
-const salvaConfigurazione = (n, v) => {
-  salva.addEventListener('click', function () {
-    setItem(n, v);
-  })
-};
-
-
 // Var definitions
 const salva = getID('salva');
 const calcola = getID('calcola');
@@ -102,13 +96,20 @@ onload = (event) => {
 };
 
 
-calcola.addEventListener('click', function () {
+calcola.addEventListener('click', () => {
   htmlToObj(valoriInput, totale.input);
   initializeObject(Macros, totale.macros);
   totaleMacros = Object.entries(totale.macros);
   calcoloMacros(Object.entries(totale.macros));
   printResults(risultati, totale.macros);
   salva.disabled = !totale.macros.Proteine.Kcal;
-  salvaConfigurazione(Date.now(), JSON.stringify(totale.macros));
 });
 
+salva.addEventListener('click', () => {
+  let n = prompt('Nome della configurazione:')
+  setItem(n, JSON.stringify(totaleMacros));
+});
+
+recupera.addEventListener('click', () => {
+  totale.macros = Object.fromEntries(JSON.parse(getItem('name')));
+})
