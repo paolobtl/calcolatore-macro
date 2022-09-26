@@ -6,28 +6,38 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <meta name="robots" content="noindex">
   <title>Calcolatore Macronutrientri</title>
-  <script defer src="script.js"></script>
+  <script defer src="script2.js"></script>
   <link rel="stylesheet" href="style.css">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 <body>
   <h1>Calcolatore Macronutrientri</h1>
 
-    Totale kcal<input type="number" min="0" max"400" class="valoriInput" id="totaleKcal">
-    Peso<input type="number" step="0.01" min="0" max"400" class="valoriInput" id="peso">
-    Proteine g/kg<span title="Quante proteine per kg di peso corporeo?" class="material-icons md-18">help_outline</span><input type="number" step="0.01" min="0" max"400" class="valoriInput" id="qtyPro">
-    Grassi g/kg<span title="Quanti grassi per kg di peso corporeo?" class="material-icons md-18">help_outline</span><input type="number" step="0.01" min="0" max"400" class="valoriInput" id="qtyFat">
-    Carboidrati g/kg<span title="Questo campo verrà calcolato automaticamente" class="material-icons md-18">help_outline</span><input type="number" min="0" max"400" class="valoriInput" id="qtyCarb" readonly>
+    <label for="totaleKcal">Totale kcal</label>
+    <input type="number" min="0" max"400" class="valoriInput" name="totaleKcal" id="totaleKcal">
+    
+    <label for="peso">Peso</label>
+    <input type="number" step="0.01" min="0" max"400" class="valoriInput" name="peso" id="peso">
+    
+    <label for="qtyPro">Proteine g/kg</label>
+    <span title="Quante proteine per kg di peso corporeo?" class="material-icons md-18">help_outline</span><input type="number" step="0.01" min="0" max"400" class="valoriInput" name="qtyPro" id="qtyPro">
+    
+    <label for="qtyFat">Grassi g/kg</label>
+    <span title="Quanti grassi per kg di peso corporeo?" class="material-icons md-18">help_outline</span><input type="number" step="0.01" min="0" max"400" class="valoriInput" name="qtyFat" id="qtyFat">
+    
+    <label for="qtyCarb">Carboidrati g/kg</label> 
+    <span title="Questo campo verrà calcolato automaticamente" class="material-icons md-18">help_outline</span><input type="number" min="0" max"400" class="valoriInput" name="qtyCarb" id="qtyCarb" readonly>
+    
     <input type="submit" id="calcola" value="Calcola">
 
     
-  <div id="table">
-    <table class="tg">
-    </table>
-    <div class="configurazione">
-      <a href="#" id="salva">Salva configurazione</a>
-      <a href="#table" id="recupera">Recupera configurazione</a>
+    <div class="tg" id="results">
     </div>
+
+
+  <div class="configurazione">
+    <a href="#" id="salva">Salva configurazione</a>
+    <a href="#results" id="recupera">Recupera configurazione</a>
   </div>
 </body>
 </html>

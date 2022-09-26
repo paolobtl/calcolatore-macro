@@ -1,17 +1,13 @@
 body {
   margin: 2em;
 }
-.material-icons.md-18 { font-size: 18px; }
 
-h1 {
-  font-size: 1.5em;
-}
 .valoriInput {
   display: block;
   margin-bottom: 1em
 }
 
-.error {
+.errore {
   letter-spacing: -0.2px;
   word-spacing: 2px;
   color: #FF0000;
@@ -22,15 +18,33 @@ h1 {
   text-transform: none;
 }
 
-#table {
-  margin-top: 2em
+.results-outerContainer {
+  display: inline-block;
+  flex-basis: calc(560px * 999 - 100% * 999);
+  margin: 1rem;
+  max-width: 100%;
+  min-width: calc((100% / 3) - (1rem * 2));
+  text-align: center;
+  font-weight: bold
 }
 
-.tg {
-  border-collapse: collapse;
-  border-color: #9ABAD9;
-  border-spacing: 0;
+.results-innerContainer {
+  font-weight: normal;
+  margin: 1em
 }
+
+.results-innerContainer > span:nth-child(-n+1) {
+ color: rgb(161, 1, 1);
+ font-weight: 400;
+ display: block;
+}
+
+.results-innerContainer > span:nth-child(n+1) {
+  display: block;
+  font-weight: 500;
+}
+
+
 
 .tg td {
   background-color: #EBF5FF;
@@ -65,5 +79,3 @@ h1 {
   color: rgb(48, 48, 48);
   font-weight: bold;
 }
-
-
