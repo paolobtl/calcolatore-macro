@@ -1,4 +1,5 @@
 const DEV = true;
+
 // Functions
 const log = (text) => {
   console.log(text);
@@ -16,6 +17,26 @@ const htmlToObj = (a, o) => {
   a.forEach(e => o[e.name] = parseFloat(e.value) || 0);
 };
 
+const setItem = (n, v) => {
+  window.localStorage.setItem(n, v);
+  log(`${n} saved in localStorage`);
+};
+
+const getItem = (n) => {
+  log(`${n} retrieved from localStorage`);
+  return window.localStorage.getItem(n);
+};
+
+const initializeObject  = (a, o) => {
+  for (const key of a) {
+  o[key] = {
+    'Kcal': 0,
+    'Grammi': 0,
+    'Percentuale': 0
+    };
+  };
+}
+
 const calcoloMacros = (k) => {
   let i = 0;
   let peso = totale.input.peso;
@@ -30,7 +51,6 @@ const calcoloMacros = (k) => {
     i++;
   }
   getID('qtyCarb').value = Number(parseFloat(totale.macros.Carboidrati.Grammi / peso).toFixed(1)) || '';
-  return console.log(totale.macros)
 };
 
 const printResults = (el, data) => {
@@ -55,30 +75,40 @@ const printResults = (el, data) => {
   }
 };
 
-DEV ? log('Dev 🏗') : log('App Ready 👽');
+
+const salvaConfigurazione = (n, v) => {
+  salva.addEventListener('click', function () {
+    setItem(n, v);
+  })
+};
+
 
 // Var definitions
 const salva = getID('salva');
 const calcola = getID('calcola');
+const recupera = getID('recupera');
 const risultati = getID('results');
 const valoriInput = querySelectorAll('.valoriInput');
 const Macros = ['Proteine', 'Grassi', 'Carboidrati'];
+let totaleMacros
 const totale = {
   input: {},
   macros: {}
 };
-for (const key of Macros) {
-  totale.macros[key] = {
-    'Kcal': 0,
-    'Grammi': 0,
-    'Percentuale': 0
-  };
+
+onload = (event) => { 
+  DEV ? log('Dev 🏗') : log('App Ready 👽');
+  recupera.disabled = localStorage.length === 0
 };
 
 
 calcola.addEventListener('click', function () {
   htmlToObj(valoriInput, totale.input);
+  initializeObject(Macros, totale.macros);
   totaleMacros = Object.entries(totale.macros);
   calcoloMacros(Object.entries(totale.macros));
   printResults(risultati, totale.macros);
+  salva.disabled = !totale.macros.Proteine.Kcal;
+  salvaConfigurazione(Date.now(), JSON.stringify(totale.macros));
 });
+
