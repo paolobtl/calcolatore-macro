@@ -1,35 +1,36 @@
 const DEV = true;
 // Functions
 const log = (text) => {
-    console.log(text);
+  console.log(text);
 };
 const getID = (ID) => {
-    return document.getElementById(ID);
+  return document.getElementById(ID);
 }
 const querySelectorAll = (SELECTOR) => {
-    return document.querySelectorAll(SELECTOR);
+  return document.querySelectorAll(SELECTOR);
 }
 const resetAll = (a) => {
-    a.forEach(e => e.value = '')
+  a.forEach(e => e.value = '')
 };
 const htmlToObj = (a, o) => {
-    a.forEach(e => o[e.name] = parseFloat(e.value) || 0);
+  a.forEach(e => o[e.name] = parseFloat(e.value) || 0);
 };
 
 const calcoloMacros = (k) => {
-    let i = 0;
-    while (i < k.length) {
-        let N = (k[i][0] === 'Grassi') ? 9 : 4;
-        let peso = totale.input.peso;
-        let qtyPro = totale.input.qtyPro;
-        let qtyFat = totale.input.qtyFat;
-        let qty = (N === 9) ? qtyFat : qtyPro;
-        k[i][1].Kcal = (k[i][0] === 'Carboidrati') ? totale.input.totaleKcal - ((peso * qtyPro * 4) + (peso * qtyFat * 9)) : peso * qty * N;
-        k[i][1].Grammi = k[i][1].Kcal / N;
-        k[i][1].Percentuale = Number(parseFloat(totaleMacros[i][1].Kcal / totale.input.totaleKcal * 100).toFixed(1)) || 0;
-        i++;
-    }
-    return console.log(totale.macros)
+  let i = 0;
+  let peso = totale.input.peso;
+  let qtyPro = totale.input.qtyPro;
+  let qtyFat = totale.input.qtyFat;
+  while (i < k.length) {
+    let N = (k[i][0] === 'Grassi') ? 9 : 4;
+    let qty = (N === 9) ? qtyFat : qtyPro;
+    k[i][1].Kcal = (k[i][0] === 'Carboidrati') ? Number(parseFloat(totale.input.totaleKcal - ((peso * qtyPro * 4) + (peso * qtyFat * 9))).toFixed(1)) : Number(parseFloat(peso * qty * N).toFixed(1));
+    k[i][1].Grammi = Number((k[i][1].Kcal / N).toFixed(1));
+    k[i][1].Percentuale = Number(parseFloat(totaleMacros[i][1].Kcal / totale.input.totaleKcal * 100).toFixed(1)) || 0;
+    i++;
+  }
+  getID('qtyCarb').value = Number(parseFloat(totale.macros.Carboidrati.Grammi / peso).toFixed(1)) || '';
+  return console.log(totale.macros)
 };
 
 const printResults = (el, data) => {
@@ -39,21 +40,20 @@ const printResults = (el, data) => {
     outerDiv.classList = "results results-outerContainer"
     outerDiv.innerHTML = k;
     el.appendChild(outerDiv);
-    for( x in data[k]) {
-        let div = document.createElement("div");
-        div.classList = "results results-innerContainer"
-        let spanT = document.createElement("span"); 
-        let spanR = document.createElement("span"); 
-        spanT.innerHTML = x;
-        spanR.innerHTML = data[k][x];
-        div.appendChild(spanR);
-        div.appendChild(spanT);
-        outerDiv.appendChild(div);
-        //log(totale.macros[k][x])
+    for (x in data[k]) {
+      let div = document.createElement("div");
+      div.classList = "results results-innerContainer"
+      let spanT = document.createElement("span");
+      let spanR = document.createElement("span");
+      spanT.innerHTML = x;
+      spanR.innerHTML = data[k][x];
+      div.appendChild(spanR);
+      div.appendChild(spanT);
+      outerDiv.appendChild(div);
     }
-    
-}
-  };
+
+  }
+};
 
 DEV ? log('Dev 🏗') : log('App Ready 👽');
 
@@ -64,21 +64,21 @@ const risultati = getID('results');
 const valoriInput = querySelectorAll('.valoriInput');
 const Macros = ['Proteine', 'Grassi', 'Carboidrati'];
 const totale = {
-    input: {},
-    macros: {}
+  input: {},
+  macros: {}
 };
 for (const key of Macros) {
-    totale.macros[key] = {
-        'Kcal': 0,
-        'Grammi': 0,
-        'Percentuale': 0
-    };
+  totale.macros[key] = {
+    'Kcal': 0,
+    'Grammi': 0,
+    'Percentuale': 0
+  };
 };
 
 
 calcola.addEventListener('click', function () {
-    htmlToObj(valoriInput, totale.input);
-    totaleMacros = Object.entries(totale.macros);
-    calcoloMacros(Object.entries(totale.macros));
-    printResults(risultati, totale.macros);
+  htmlToObj(valoriInput, totale.input);
+  totaleMacros = Object.entries(totale.macros);
+  calcoloMacros(Object.entries(totale.macros));
+  printResults(risultati, totale.macros);
 });
